@@ -1,0 +1,119 @@
+\documentclass[fontsize=9pt,
+                letterpaper,
+                headings=normal,
+                landscape]{scrartcl}
+
+
+\usepackage[margin=0.25in]{geometry}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage[compact]{titlesec}
+\usepackage{enumitem}
+\usepackage{etoolbox, letltxmacro}
+
+
+\setlength\columnsep{15pt}
+
+
+% define a commandlist environment based on description
+\newenvironment{commandlist}{\begin{description}[noitemsep]}{\end{description}}
+\AtBeginEnvironment{commandlist}{%
+\LetLtxMacro{\commanditem} {\item}
+\let\olditem\item
+\renewcommand\item[1][]{\olditem[{\texttt{#1}}] \raggedright \dotfill }}%
+
+
+\begin{document}
+
+\section*{Emacs Cheat Sheet}
+
+
+\begin{multicols*}{3}
+
+%---------------------------------------------------------------------------
+\subsection*{General Emacs Commands}
+
+\begin{commandlist}
+  \item[Ctl-x Ctl-c] quit
+  \item[Ctl-g] break (i.e. interrupt dialog/command)
+  \item [Ctrl-h v] describe a variable. 
+
+\end{commandlist}
+
+
+\begin{commandlist}
+  \item[M-x describe-variable] display the value and documentation of a global variable
+  \item[M-x set-variable] useful for changing a global variable; equivalent to \verb|(setq ...)| in init file
+\end{commandlist}
+
+\begin{commandlist}
+  \item[M-x eval-region] evalute Emacs lisp code in selected region, useful for adding something to init file
+\end{commandlist}
+
+\vspace*{\fill}
+\columnbreak
+
+
+%---------------------------------------------------------------------------
+\subsection*{\texttt{<leader>} commands, all modes}
+
+All commands are prefaced with \texttt{<leader>}, where:
+\begin{center}
+\texttt{<leader>} = \texttt{<SPC>}
+\end{center}
+
+\begin{commandlist}
+  \item[x] execute extended command (\texttt{M-x})
+  \item[w] save buffer
+  \item[k] kill buffer
+  \item[b] switch buffer
+  \item[e] open (find) file
+  \item[t] transpose chars
+  \item[a] org-mode agenda
+  \item[n] org-mode capture (take note)
+  \item[\#] toggle line numbers mode
+  \item[\char`\\] split window right
+  \item[-] split window below
+  \item[0] delete current window
+  \item[1]  delete other windows
+  \item[\char`\[\ \textrm{or} \char`\]] move to other ``window'' (Emacs splits)
+  \item[\{ \textrm{or} \}] move to other ``frame'' (OS window)
+\end{commandlist}
+
+%---------------------------------------------------------------------------
+\subsection*{\texttt{<leader>} commands, code}
+
+\begin{commandlist}
+  \item[ci] comment/uncomment lines
+  \item[cl] quick comment/uncomment to a specific line
+  \item[cc] copy and comment lines
+  \item[cp] comment/uncomment paragraphs
+  \item[cr] comment/uncomment region
+\end{commandlist}
+
+
+%---------------------------------------------------------------------------
+\subsection*{\texttt{<leader>} commands, org mode}
+
+\begin{commandlist}
+  \item[SPC] org global cycle
+  \item[TAB] org cycle
+  \item[t] todo
+  \item[T] show todo tree
+  \item[v] org tree to indirect buffer
+  \item[z] narrow to subtree
+  \item[Z] widen (opposite of narrow to subtree)
+  \item[*] toggle headings
+  \item[h] move backward heading, same level
+  \item[H] move forward heading, same level
+  \item[e] org export
+  \item[i] toggle inline images
+  \item[y] copy subtree
+  \item[p] paste subtree
+  \item['] enter/leave SRC editing mode
+\end{commandlist}
+
+
+
+\end{multicols*}
+\end{document}
