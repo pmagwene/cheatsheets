@@ -1,0 +1,125 @@
+\documentclass[fontsize=9pt,
+                letterpaper,
+                headings=normal,
+                landscape]{scrartcl}
+
+
+\usepackage[margin=0.25in]{geometry}
+\usepackage{tabularx}
+
+\usepackage{multicol}
+\setlength\columnsep{15pt}
+
+\usepackage[compact]{titlesec}
+
+\usepackage{enumitem}
+
+\usepackage{etoolbox, letltxmacro}
+\AtBeginEnvironment{commandlist}{%
+\LetLtxMacro{\priceitem} {\item}
+\let\olditem\item
+\renewcommand\item[1][]{\olditem[{\texttt{#1}}] \raggedright \dotfill }}%
+
+\newenvironment{commandlist}{\begin{description}[noitemsep]}{\end{description}}
+
+
+
+\newlength{\prevsep}
+\newenvironment{commandtable}
+{\ignorespaces%
+ \setlength{\prevsep}{\tabcolsep}%
+ \setlength{\tabcolsep}{1pt}%
+ \tabularx{\columnwidth}{@{}lXr@{}}}
+{\endtabularx\setlength{\tabcolsep}{\prevsep}\ignorespacesafterend}
+
+\newcommand{\cm}[2]{\noindent\raggedright\texttt{#1} \dotfill\ #2 \newline}
+\newcommand{\cmd}[2]{\texttt{#1} & & #2 \\}
+
+
+\begin{document}
+
+\section*{Emacs Cheat Sheet}
+
+
+\begin{multicols*}{3}
+
+%---------------------------------------------------------------------------
+\subsection*{General Emacs Commands}
+\cm{Ctl-x Ctl-c}{quit}
+\cm{Ctl-g}{break (i.e. interrupt dialog/command)}
+
+\cm{M-x eval-region}{Evalute Emacs lisp code in selected region, useful for adding something to init file}
+
+\begin{commandlist}
+
+\item[M-x eval region] Evalute Emacs lisp code in selected region, useful for adding something to init file
+
+\end{commandlist}
+
+
+\begin{commandlist}
+\item[Ctl-x Ctl-c] quit
+\item[Ctl-g] break (i.e. interrupt dialog/command)
+\end{commandlist}
+
+\vspace*{\fill}
+\columnbreak
+
+
+\subsection*{\texttt{<leader>} commands, all modes}
+All commands are prefaced with \texttt{<leader>}, where:
+\begin{center}
+\texttt{<leader>} = \texttt{<SPC>}
+\end{center}
+
+\cm{x}{execute extended command (\texttt{M-x})}
+\cm{w}{save buffer}
+\cm{k}{kill buffer}
+\cm{b}{switch buffer}
+\cm{e}{open (find) file}
+\cm{t}{transpose chars}
+\cm{a}{org-mode agenda}
+\cm{n}{org-mode capture (take note)}
+\cm{\#}{toggle line numbers mode}
+\cm{\char`\\}{split window right}
+\cm{-}{split window below}
+\cm{0}{delete current window}
+\cm{1}{delete other windows}
+\cm{[ \textrm{or} ]}{move to other ``window'' (Emacs splits)}
+\cm{\{ \textrm{or} \}}{move to other ``frame'' (OS window)}
+
+
+%---------------------------------------------------------------------------
+\subsection*{\texttt{<leader>} commands, code}
+
+\cm{ci}{comment/uncomment lines}
+\cm{cl}{quick comment/uncomment to a specific line}
+\cm{cc}{copy and comment lines}
+\cm{cp}{comment/uncomment paragraphs}
+\cm{cr}{comment/uncomment region}
+
+
+
+%---------------------------------------------------------------------------
+\subsection*{\texttt{<leader>} commands, org mode}
+
+\cm{SPC}{org global cycle}
+\cm{TAB}{org cycle}
+\cm{t}{todo}
+\cm{T}{show todo tree}
+\cm{v}{org tree to indirect buffer}
+\cm{z}{narrow to subtree}
+\cm{Z}{widen (opposite of narrow to subtree)}
+\cm{*}{toggle headings}
+\cm{h}{move backward heading, same level}
+\cm{H}{move forward heading, same level}
+\cm{e}{org export}
+\cm{i}{toggle inline images}
+\cm{y}{copy subtree}
+\cm{p}{paste subtree}
+\cm{'}{enter/leave SRC editing mode}
+
+
+
+\end{multicols*}
+\end{document}
