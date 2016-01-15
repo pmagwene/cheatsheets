@@ -36,27 +36,50 @@
 \begin{commandlist}
   \item[Ctl-x Ctl-c] quit
   \item[Ctl-g] break (i.e. interrupt dialog/command)
-  \item [Ctrl-h v] describe a variable. 
+  \item[Ctl-s, Ctl-r] search forward / backward
+  \item[M-!] run shell command
+  \item[M-|] run shell command on selected text
+
 
 \end{commandlist}
 
 
 \begin{commandlist}
+  \item [Ctrl-h v] describe a variable. 
   \item[M-x describe-variable] display the value and documentation of a global variable
   \item[M-x set-variable] useful for changing a global variable; equivalent to \verb|(setq ...)| in init file
+  \item[M-x eval-region] evalute Emacs lisp code in selected region, useful for adding something to init file  
 \end{commandlist}
 
 \begin{commandlist}
-  \item[M-x eval-region] evalute Emacs lisp code in selected region, useful for adding something to init file
+  \item[M-x untabify] convert tabs to spaces (all or region)
 \end{commandlist}
 
-\vspace*{\fill}
-\columnbreak
+\begin{commandlist}
+  \item [Ctrl-\char`\\] toggle input method
+  \item [Ctrl-x RET Ctrl-\char`\\] set input method
+  \item[M-x set-input-method RET Tex] enable \TeX\ style input of symbols
+  \item[M-x insert-char] insert unicode character
+
+\end{commandlist}
 
 
 %---------------------------------------------------------------------------
+\subsection*{My Emacs customizations}
+
+\begin{commandlist}
+  \item [Ctl-+ \textrm{or} Ctl-=] increase text size
+  \item [Ctl--] decrease text size
+\end{commandlist}
+
+
+
+\vspace*{\fill}
+\columnbreak
+%---------------------------------------------------------------------------
 \subsection*{\texttt{<leader>} commands, all modes}
 
+These are my customizations using the \verb|evil-leader| package.
 All commands are prefaced with \texttt{<leader>}, where:
 \begin{center}
 \texttt{<leader>} = \texttt{<SPC>}
@@ -89,6 +112,7 @@ All commands are prefaced with \texttt{<leader>}, where:
   \item[cc] copy and comment lines
   \item[cp] comment/uncomment paragraphs
   \item[cr] comment/uncomment region
+  \item[cb] draw comment box around region
 \end{commandlist}
 
 
