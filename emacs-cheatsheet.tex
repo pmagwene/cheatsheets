@@ -1,14 +1,24 @@
+%!TEX TS-program = xelatex
 \documentclass[fontsize=9pt,
-                letterpaper,
+                paper=letter,
                 headings=normal,
                 landscape]{scrartcl}
+
+\usepackage[no-math]{fontspec}
+\setmainfont[Ligatures=TeX,Numbers={Lining,Proportional}]{Equity Text A}
+\setsansfont{Concourse T4}
+\setmonofont[Scale=0.9,StylisticSet={2}]{Triplicate T4s}  % stylistic set 2 = code mode
+\newfontfamily\headingfont[]{Concourse T4}
+
+\RedeclareSectionCommands[
+  beforeskip=-.5\baselineskip,
+  afterskip=.1\baselineskip
+]{section,subsection,subsubsection}
 
 
 \usepackage[margin=0.25in]{geometry}
 \usepackage{tabularx}
-\usepackage{multicol}
-\usepackage[compact]{titlesec}
-\usepackage{enumitem}
+\usepackage{multicol}\usepackage{enumitem}
 \usepackage{etoolbox, letltxmacro}
 
 
@@ -18,9 +28,10 @@
 % define a commandlist environment based on description
 \newenvironment{commandlist}{\begin{description}[noitemsep]}{\end{description}}
 \AtBeginEnvironment{commandlist}{%
-\LetLtxMacro{\commanditem} {\item}
+\LetLtxMacro{\commanditem}{\item}
 \let\olditem\item
-\renewcommand\item[1][]{\olditem[{\texttt{#1}}] \raggedright \dotfill }}%
+\renewcommand\item[1][]{\olditem[{#1}]\raggedright\dotfill}}%
+\addtokomafont{descriptionlabel}{\ttfamily\mdseries}
 
 
 \begin{document}
@@ -36,19 +47,12 @@
 \begin{commandlist}
   \item[Ctl-x Ctl-c] quit
   \item[Ctl-g] break (i.e. interrupt dialog/command)
+  \item[Ctl-/] Emacs undo
+  \item[Ctl-R] Redo (via evil and undo-tree)
   \item[Ctl-s, Ctl-r] search forward / backward
+  \item[M-\%] query replace
   \item[M-!] run shell command
   \item[M-|] run shell command on selected text
-
-
-\end{commandlist}
-
-
-\begin{commandlist}
-  \item [Ctrl-h v] describe a variable. 
-  \item[M-x describe-variable] display the value and documentation of a global variable
-  \item[M-x set-variable] useful for changing a global variable; equivalent to \verb|(setq ...)| in init file
-  \item[M-x eval-region] evalute Emacs lisp code in selected region, useful for adding something to init file  
 \end{commandlist}
 
 \begin{commandlist}
@@ -60,8 +64,21 @@
   \item [Ctrl-x RET Ctrl-\char`\\] set input method
   \item[M-x set-input-method RET Tex] enable \TeX\ style input of symbols
   \item[M-x insert-char] insert unicode character
-
 \end{commandlist}
+
+\subsection*{Getting help}
+
+\begin{commandlist}
+  \item[Ctrl-h v] describe a variable. 
+  \item[M-x describe-variable] \\ display the value and documentation of a global variable
+  \item[Ctrl-h f] describe a function
+  \item[M-x describe-function] same as bove
+  \item[M-x set-variable] \\ change a global variable; like to \verb|(setq ...)| in init file
+  \item[M-x eval-region] \\ evalute Emacs lisp code in region, useful for changing init file  
+\end{commandlist}
+
+
+
 
 
 %---------------------------------------------------------------------------
@@ -137,7 +154,17 @@ All commands are prefaced with \texttt{<leader>}, where:
   \item['] enter/leave SRC editing mode
 \end{commandlist}
 
+\subsection*{\texttt{<leader>} commands, auctex mode}
+\begin{commandlist}
+  \item[l] compile and view \LaTeX\ file
+\end{commandlist}
 
 
 \end{multicols*}
 \end{document}
+
+%%% Local Variables: 
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: xelatex
+%%% End: 
